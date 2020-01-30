@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": ["USE_MPI"],
+            "compilerPath": "/usr/bin/gcc",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
