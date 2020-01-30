@@ -29,7 +29,7 @@ int main(int argc, char **argv){
     double ans, err, t, t_err;
     task->ans(ans, err);
     task->timing(t, t_err);
-    printf("%f %f %f %f %f %f\n", double(nproc), double(npoints), 
+    printf("%.10g %.10g %.10g %.10g %.10g %.10g\n", double(nproc), double(npoints), 
         ans, err, t, t_err );
     delete task;
     return 0;
