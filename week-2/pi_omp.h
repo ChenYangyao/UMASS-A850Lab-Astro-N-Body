@@ -60,7 +60,10 @@ inline double PI_Omp_Quadrature::_run(){
                 _mm256_add_pd( ones, _mm256_mul_pd(x,x) ) );
             localsum = _mm256_add_pd(localsum, y);
         }
-        vsum = _mm256_add_pd( vsum, localsum );
+        #pragma omp critical
+        {
+            vsum = _mm256_add_pd( vsum, localsum );
+        }
     }
     
     double *buf = (double *)&vsum;
