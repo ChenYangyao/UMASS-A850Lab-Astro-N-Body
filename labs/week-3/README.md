@@ -25,7 +25,7 @@ The download and documentation can be found at HDF group [home page](https://por
         disjoint file views. Three panels are tests performed on three different 
         platforms: a DELL PC, a Huawei Workstation and a DELL cluster. At each panel 
         we perform IO of contiguous data with size indicated in the x-axis.
-    </t>
+    </td>
 </tr></table>
 
 <table><tr>
@@ -39,5 +39,5 @@ The download and documentation can be found at HDF group [home page](https://por
         In each panel, one data access parameter is adjusted and the IO thoughtput
         is measured with different parameter values. All these test is done on 
         the local DELL PC with Linux Kernel Version 4.15.
-    </t>
+    </td>
 </tr></table>
