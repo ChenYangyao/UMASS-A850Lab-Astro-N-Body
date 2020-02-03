@@ -17,7 +17,7 @@ The download and documentation can be found at HDF group [home page](https://por
 ## Lab - Timing the IO with Different Tools
 
 <table><tr>
-    <td><img src="./out/tune_chunk.png"></td>
+    <td><img src="./out/tune_chunk.png" style="border: none;"></td>
     <td style="text-align:top;font-size: small;" width="300">
         <em>the IO performance with HDF5 with chunk data-layout. </em><br> 
         We perform IO of many "Chunk_IO"-size chunks, 
@@ -25,6 +25,6 @@ The download and documentation can be found at HDF group [home page](https://por
         The default data access parameter is listed in the lower-right panel.
         In each panel, one data access parameter is adjusted and the IO thoughtput
         is measured with different parameter values. All these test is done on 
-        the local DELL PC with Linux Kernel Version 4.15
+        the local DELL PC with Linux Kernel Version 4.15.
     </td>
 </tr></table>
