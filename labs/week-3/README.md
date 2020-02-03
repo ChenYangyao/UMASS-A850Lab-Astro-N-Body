@@ -16,15 +16,28 @@ The download and documentation can be found at HDF group [home page](https://por
 
 ## Lab - Timing the IO with Different Tools
 
-<table border="0"><tr>
+<table><tr>
+    <td><img src="./out/tune_iosize.png"></td></tr><tr>
+    <td><em>The IO performance of different IO tools. </em><br> 
+        IOs are performed with five different IO tools: the formated IO in C++ 
+        standard library &lt;iostream&gt;, the native binary IO in 
+        &lt;iostream&gt;, HDF5, HDF5 parallel version, and MPI collective IO with 
+        disjoint file views. Three panels are tests performed on three different 
+        platforms: a DELL PC, a Huawei Workstation and a DELL cluster. At each panel 
+        we perform IO of contiguous data with size indicated in the x-axis.
+    </t>
+</tr></table>
+
+<table><tr>
     <td><img src="./out/tune_chunk.png"></td>
-    <td style="text-align:top;font-size: small;" width="300">
-        <em>the IO performance with HDF5 with chunk data-layout. </em><br> 
+    <td width="300"><em>The IO performance with HDF5 with chunk data-layout. </em><br> 
         We perform IO of many "Chunk_IO"-size chunks, 
         on a 128 MiB dataset with "Chunk_Storage=8 KiB" storage chunks. 
-        The default data access parameter is listed in the lower-right panel.
+        The default data access parameters, including the IO chunk size, cache size, 
+        cache hash table slot number, and cache LRU scheduling parameter "w_0", 
+        are listed on the lower-right panel.
         In each panel, one data access parameter is adjusted and the IO thoughtput
         is measured with different parameter values. All these test is done on 
         the local DELL PC with Linux Kernel Version 4.15.
-    </td>
+    </t>
 </tr></table>
