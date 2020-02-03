@@ -16,8 +16,8 @@ The download and documentation can be found at HDF group [home page](https://por
 
 ## Lab - Timing the IO with Different Tools
 
-<table><tr>
-    <td><img src="./out/tune_chunk.png" style="border: none;"></td>
+<table border="0"><tr>
+    <td><img src="./out/tune_chunk.png"></td>
     <td style="text-align:top;font-size: small;" width="300">
         <em>the IO performance with HDF5 with chunk data-layout. </em><br> 
         We perform IO of many "Chunk_IO"-size chunks, 
