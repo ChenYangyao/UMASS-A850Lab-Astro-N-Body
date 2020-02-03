@@ -45,7 +45,7 @@ int main(int argc, char const *argv[]){
             ELUCID::Cosmo.R_virial( grp.haloMass, 0. ), 
             halo.Pos, halo.MostBoundID );
         gals.emplace_back( gal.mass_approx, gal.sfr );
-        if( cnt_halos > 1000 ) break;
+        if( ++cnt_halos > 1000 ) break;
     }
 
     auto &rs = ELUCID::Rs;
