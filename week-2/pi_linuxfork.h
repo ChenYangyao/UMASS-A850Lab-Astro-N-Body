@@ -26,7 +26,7 @@ protected:
             return sum * 4.0 * h;
         };
 
-        // fork processes. Also open an message queue for passing result from
+        // fork processes. Also open a message queue for passing result from
         // children to parent.
         vector<int> pids;
         MYSYS::MQueue mq("/pi_linuxfork", "rw");
