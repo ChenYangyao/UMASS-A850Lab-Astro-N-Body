@@ -4,4 +4,5 @@
 #PBS -lselect=32:ncpus=4:mem=32gb:mpiprocs=4
 export OMP_NUM_THREADS=1
 cd /work/yangyao/science/n-body/week-3/src
+shtool_export_lib $lib/parallel/hdf5
 mpiexec -n 128 ./adjust_parallel.mpout 32764 ../out/orion 1 128
