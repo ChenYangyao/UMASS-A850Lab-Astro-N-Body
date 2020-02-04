@@ -87,10 +87,18 @@ int main(int argc, char const *argv[]){
         out[i] = vec[i].key;\
     }\
 }
+#define vectorize3( vec, x, y, z, out ) {\
+    out.resize( vec.size()*3 );\
+    for(size_t i=0; i<vec.size(); ++i){\
+        out[3*i] = vec[i].x;\
+        out[3*i+1] = vec[i].y;\
+        out[3*i+2] = vec[i].z;\
+    }\
+}
     descrpts = { {"halo mass [10^10 Mpc/h]"},{"virial radius [Mpc/h]"},
-        {"coord x [Mpc/h]"},{"coord y [Mpc/h]"},{"coord z [Mpc/h]"},
+        {"coordiantes (x,y,z) [Mpc/h]"},
         {"most bound particle id"} };
-    names = { "halo-mass", "rvir", "x", "y", "z", "bound-id"};
+    names = { "halo-mass", "rvir", "coord", "bound-id"};
 #define write_halo(key, out, type, id){\
     vectorize(halos, key, out)\
     auto dset = grphalo.create_dataset<type>( names[id], { halos.size() } );\
@@ -100,9 +108,14 @@ int main(int argc, char const *argv[]){
 }
     write_halo(mass, v, double, 0)
     write_halo(rvir, v, double, 1)
-    write_halo(pos[0], v, double, 2)
-    write_halo(pos[1], v, double, 3)
-    write_halo(pos[2], v, double, 4)
+    vectorize3(halos, pos[0], pos[1], pos[2], v)
+    {
+        auto dset = grphalo.create_dataset<double>( 
+            names[2], { halos.size(), 3 } );
+        dset.write(v);
+        dset.create_attr<string>("description", H5TypeStr::shape( descrpts[2] ))
+            .write( descrpts[2] );
+    }
     write_halo(boundid, vll, long long, 5)
 
     /**
