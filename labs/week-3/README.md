@@ -1,6 +1,6 @@
 # Lab: IO with HDF5
 
-[Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./out/perf_measure.ipynb) | [View pdf images](./out) | [View source code](./src)
+[Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./out/perf_measure.ipynb) | [View pdf images](./out) | View source code [using-hdf5](./src_learn_hdf5) and [timing-the-IO](./src)
 
 ## Introduction
 
@@ -9,18 +9,91 @@ HDF5 is a file format, a data organization/access model, and also a suite of sof
 - The file format of HDF5 is stanadarized by `HDF5 File Format Specification`. 
 It specifies the bit-level storage layout of data, and hides many details that is unnecessarily exposed to user.
 
-- The `HDF5 Abstract Data Model` specify the building blocks of HDF5 file - 
-the HDF5 object. Two primary objects in HDF5 is group and dataset.
+- The `HDF5 Abstract Data Model` specify the building blocks of HDF5 file - the HDF5 object. Two primary objects in HDF5 is group and dataset.
 
 - The HDF5 community provide a complete set of softwares and language interfaces. 
 C, C++, Fortran, Python and Java users can all use HDF5 to manipulate the same data file.
 
 The download and documentation can be found at HDF group [home page](https://portal.hdfgroup.org/display/support/Documentation?utm_source=hdfhomepage).
 
+## Lab - creating, reading and working with HDF5
+
+As an example of manipulating dataset using HDF5, I transform a existed dark matter halo catalog in a [N-body simulation](http://stacks.iop.org/0004-637X/831/i=2/a=164?key=crossref.7263525aa9855196b4f2f603a9360323), which is dumped in a platform-dependent binary format, into a HDF5 file. The design of the content organization is
+```bash
+/root [G]
+  |- cosmology [G]              # The cosmology information used in the simulation
+  |     |- redshift [D]         #   including the redshift, scale factor and cosmic 
+  |     |- cosmic-time [D]      #   time of each snapshot
+  |     |- scale-factor [D]
+  |- halos [G]
+  |     |- halo-mass [D]        # The halo catalog, including halo mass, virial radius,
+  |     |- rvir [D]             #   coordinates (x, y, z) and most bound particle ID
+  |     |- x [D]                #   of each halo.
+  |     |- y [D]                
+  |     |- z [D]              
+  |     |- bound-id [D]
+  |- galaxies [G]               # The galaxy catalog, including stellar mass and
+        |- stellar-mass [D]     # star formation rate of each galaxy. The galaxies
+        |- SFR [D]              # are modelled by an empirical model.
+```
+where the item with [G] means a HDF5 group, and [D] means a dataset. Such a design is natural:
+- The cosmology, halos, and galaxies are three distinct parts of this simulation. So
+we should use different groups to represent them
+
+- At each group, we have many physical quantities of the objects in this group, e.g. halos or
+galaxies. So we use a dataset to describe each of these quantities.
+
+- For each dataset, we have an attribute named 'description' which is a string of HDF5
+type `H5T_C_S1` (resized to proper length). We use this string to record some information
+about this quantity, including its formal name, and unit.
+
+We may use `h5ls -r` to check this catalog. In the shell, it outputs such information
+```bash
+/                        Group
+/cosmology               Group
+/cosmology/cosmic-time   Dataset {101}
+/cosmology/redshift      Dataset {101}
+/cosmology/scale-factor  Dataset {101}
+/galaxies                Group
+/galaxies/SFR            Dataset {1001}
+/galaxies/stellar-mass   Dataset {1001}
+/halos                   Group
+/halos/bound-id          Dataset {1001}
+/halos/halo-mass         Dataset {1001}
+/halos/rvir              Dataset {1001}
+/halos/x                 Dataset {1001}
+/halos/y                 Dataset {1001}
+/halos/z                 Dataset {1001}
+```
+which is exactly what we want. We can also use `h5duml -H`, this time, it outputs the header information of each object in the file (in a format call HDF5 DDL):
+```bash
+HDF5 "Obj.EmpiricalModel.N3072.L500" {
+GROUP "/" {
+   GROUP "cosmology" {
+      DATASET "cosmic-time" {
+         DATATYPE  H5T_IEEE_F64LE
+         DATASPACE  SIMPLE { ( 101 ) / ( 101 ) }
+         ATTRIBUTE "description" {
+            DATATYPE  H5T_STRING {
+               STRSIZE 20;
+               STRPAD H5T_STR_NULLTERM;
+               CSET H5T_CSET_ASCII;
+               CTYPE H5T_C_S1;
+            }
+            DATASPACE  SIMPLE { ( 1 ) / ( 1 ) }
+         }
+      }
+      DATASET "redshift" {
+... ...
+```
+
+
+
+
 ## Lab - Timing the IO with Different Tools
 
 The main motivation of using HDF5 is performance and portablity. A programming language like 
-C/C++ and Fortran typically provides both the formated IO tools and the binary IO tools. Both of
+C/C++ or Fortran typically provides both formated IO tools and the binary IO tools. Both of
 them have short-commings:
 
 - The formated IO, such as `printf/fprintf/sprintf/snprintf/...` (and their input counterpart) provided by C library, 
@@ -33,10 +106,10 @@ which in many cases makes the effort of computer architecture desingners vanishe
 is that the binary format is platform-dependent. For example, the endian (big/little/PDP/...) and floating-point 
 representation (IEEE-754/IBM/Hewlett-Packard/PDP/...) may vary from platform to another.
 
-The HDF5 try to solve these problems by creating a self-explanatory file format. The file and object heads in 
-the HDF5 file provide descriptions of the data representation and layout, the library tools are then 
-provided to convert them with native representation in different platforms. The conversion, and the overhead
-introduced by the data organization, may cause some performance loss, and therefore need to be tested.
+HDF5 tries to solve these problems by creating a self-explanatory file format. The file and object heads in 
+the HDF5 file provide descriptions of the data representation and layout, the library tools are 
+provided to convert them with native representation at different platforms. The conversion and the overhead
+introduced by the data organization may cause some performance loss, and therefore need to be tested.
 
 Many other things also have impact on the IO performance. The disk design, including disk-type, 
 seek/rotation/throughput, disk cache layout and size, and its interface with memory and processor,
