@@ -8,7 +8,7 @@ int main(int argc, char const *argv[]){
     H5File file("Obj.EmpiricalModel.N3072.L500", "r");
 
     vector<double> mass, rvir;
-    file.open_dataset("/halos/halo mass").read( mass );
+    file.open_dataset("/halos/halo-mass").read( mass );
     file.open_dataset("/halos/rvir").read( rvir );
     
     cout << "Example halos: mass, rvir" << endl;
