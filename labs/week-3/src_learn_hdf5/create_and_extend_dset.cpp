@@ -124,7 +124,6 @@ int main(int argc, char const *argv[]){
     descrpts = { {"stellar mass [10^10 Mpc/h]"},
         {"star formation rate [ 10 Msun/yr ]"} };
     names = { "stellar-mass", "SFR"};
-    cout << "done" << endl;
 #define write_galaxy(key, out, type, id){\
     vectorize(gals, key, out)\
     auto dset = grpgal.create_dataset<type>( names[id], { gals.size() } );\
@@ -134,7 +133,6 @@ int main(int argc, char const *argv[]){
 }
     write_galaxy(mass, v, double, 0)
     write_galaxy(sfr, v, double, 1)
-    cout << "done" << endl;
 
     return 0;
 }

@@ -28,9 +28,7 @@ As an example of manipulating dataset using HDF5, I transform a existed dark mat
   |- halos [G]
   |     |- halo-mass [D]        # The halo catalog, including halo mass, virial radius,
   |     |- rvir [D]             #   coordinates (x, y, z) and most bound particle ID
-  |     |- x [D]                #   of each halo.
-  |     |- y [D]                
-  |     |- z [D]              
+  |     |- coord [D]            #   of each halo.              
   |     |- bound-id [D]
   |- galaxies [G]               # The galaxy catalog, including stellar mass and
         |- stellar-mass [D]     # star formation rate of each galaxy. The galaxies
@@ -47,7 +45,7 @@ galaxies. So we use a dataset to describe each of these quantities.
 type `H5T_C_S1` (resized to proper length). We use this string to record some information
 about this quantity, including its formal name, and unit.
 
-We may use `h5ls -r` to check this catalog. In the shell, it outputs such information
+We may use `h5ls -r filename` to check this catalog. In the shell, it outputs such information
 ```bash
 /                        Group
 /cosmology               Group
@@ -59,13 +57,11 @@ We may use `h5ls -r` to check this catalog. In the shell, it outputs such inform
 /galaxies/stellar-mass   Dataset {1001}
 /halos                   Group
 /halos/bound-id          Dataset {1001}
+/halos/coord             Dataset {1001, 3}
 /halos/halo-mass         Dataset {1001}
 /halos/rvir              Dataset {1001}
-/halos/x                 Dataset {1001}
-/halos/y                 Dataset {1001}
-/halos/z                 Dataset {1001}
 ```
-which is exactly what we want. We can also use `h5dump -H`, this time, it outputs the header information of each object in the file (in a format call HDF5 DDL):
+which is exactly what we want. We can also use `h5dump -H filename`, this time, it outputs the header information of each object in the file (in a format call HDF5 DDL):
 ```bash
 HDF5 "Obj.EmpiricalModel.N3072.L500" {
 GROUP "/" {
@@ -86,8 +82,41 @@ GROUP "/" {
       DATASET "redshift" {
 ... ...
 ```
-
-
+By Using `h5dump -d /halos/coord -s "0,0" -c "5,3" filename` we can view the subset 
+of the dataset `/halos/coords`:
+```bash
+HDF5 "Obj.EmpiricalModel.N3072.L500" {
+DATASET "/halos/coord" {
+   DATATYPE  H5T_IEEE_F64LE
+   DATASPACE  SIMPLE { ( 1001, 3 ) / ( 1001, 3 ) }
+   SUBSET {
+      START ( 0, 0 );
+      STRIDE ( 1, 1 );
+      COUNT ( 5, 3 );
+      BLOCK ( 1, 1 );
+      DATA {
+      (0,0): 30.6893, 26.9219, 2.31053,
+      (1,0): 42.6203, 15.8589, 4.14066,
+      (2,0): 36.9934, 21.0027, 3.0112,
+      (3,0): 28.8695, 28.5155, 3.57236,
+      (4,0): 42.9867, 15.6564, 3.53918
+      }
+   }
+   ATTRIBUTE "description" {
+      DATATYPE  H5T_STRING {
+         STRSIZE 28;
+         STRPAD H5T_STR_NULLTERM;
+         CSET H5T_CSET_ASCII;
+         CTYPE H5T_C_S1;
+      }
+      DATASPACE  SIMPLE { ( 1 ) / ( 1 ) }
+      DATA {
+      (0): "coordinates (x,y,z) [Mpc/h]"
+      }
+   }
+}
+}
+```
 
 
 ## Lab - Timing the IO with Different Tools
