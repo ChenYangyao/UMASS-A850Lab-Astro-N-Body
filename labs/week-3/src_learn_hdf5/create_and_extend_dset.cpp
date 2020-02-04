@@ -96,7 +96,7 @@ int main(int argc, char const *argv[]){
     }\
 }
     descrpts = { {"halo mass [10^10 Mpc/h]"},{"virial radius [Mpc/h]"},
-        {"coordiantes (x,y,z) [Mpc/h]"},
+        {"coordinates (x,y,z) [Mpc/h]"},
         {"most bound particle id"} };
     names = { "halo-mass", "rvir", "coord", "bound-id"};
 #define write_halo(key, out, type, id){\
