@@ -109,6 +109,7 @@ int main(int argc, char const *argv[]){
     write_halo(mass, v, double, 0)
     write_halo(rvir, v, double, 1)
     vectorize3(halos, pos[0], pos[1], pos[2], v)
+    cout << "done" << endl;
     {
         auto dset = grphalo.create_dataset<double>( 
             names[2], { halos.size(), 3 } );
