@@ -67,7 +67,7 @@ int main(int argc, char const *argv[]){
     vector<double> v; vector<long long> vll;
     vector<vector<string> > descrpts = { {"Reshift z"}, {"Scale factor a"} ,
         {"Cosmic time [Gyr/h]"} };
-    vector<string> names = {"redshift", "scale factor", "cosmic time"};
+    vector<string> names = {"redshift", "scale-factor", "cosmic-time"};
 #define write_cosm(key, id) { \
     auto dset = grpcosm.create_dataset<double>( names[id], {nsnap} );\
     dset.write( rs.key );\
@@ -90,7 +90,7 @@ int main(int argc, char const *argv[]){
     descrpts = { {"halo mass [10^10 Mpc/h]"},{"virial radius [Mpc/h]"},
         {"coord x [Mpc/h]"},{"coord y [Mpc/h]"},{"coord z [Mpc/h]"},
         {"most bound particle id"} };
-    names = { "halo mass", "rvir", "x", "y", "z", "bound id"};
+    names = { "halo-mass", "rvir", "x", "y", "z", "bound-id"};
 #define write_halo(key, out, type, id){\
     vectorize(halos, key, out)\
     auto dset = grphalo.create_dataset<type>( names[id], { halos.size() } );\
@@ -110,7 +110,7 @@ int main(int argc, char const *argv[]){
      */
     descrpts = { {"stellar mass [10^10 Mpc/h]"},
         {"star formation rate [ 10 Msun/yr ]"} };
-    names = { "stellar mass", "SFR"};
+    names = { "stellar-mass", "SFR"};
 #define write_galaxy(key, out, type, id){\
     vectorize(gals, key, out)\
     auto dset = grpgal.create_dataset<type>( names[id], { gals.size() } );\
