@@ -116,8 +116,7 @@ int main(int argc, char const *argv[]){
         dset.create_attr<string>("description", H5TypeStr::shape( descrpts[2] ))
             .write( descrpts[2] );
     }
-    write_halo(boundid, vll, long long, 5)
-    cout << "done" << endl;
+    write_halo(boundid, vll, long long, 3)
 
     /**
      * output the galaxy catalog
