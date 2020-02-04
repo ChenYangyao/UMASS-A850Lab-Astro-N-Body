@@ -65,7 +65,7 @@ We may use `h5ls -r` to check this catalog. In the shell, it outputs such inform
 /halos/y                 Dataset {1001}
 /halos/z                 Dataset {1001}
 ```
-which is exactly what we want. We can also use `h5duml -H`, this time, it outputs the header information of each object in the file (in a format call HDF5 DDL):
+which is exactly what we want. We can also use `h5dump -H`, this time, it outputs the header information of each object in the file (in a format call HDF5 DDL):
 ```bash
 HDF5 "Obj.EmpiricalModel.N3072.L500" {
 GROUP "/" {
