@@ -109,18 +109,15 @@ int main(int argc, char const *argv[]){
     write_halo(mass, v, double, 0)
     write_halo(rvir, v, double, 1)
     vectorize3(halos, pos[0], pos[1], pos[2], v)
-    cout << "done" << endl;
     {
         auto dset = grphalo.create_dataset<double>( 
             names[2], { halos.size(), 3 } );
-        cout << "done" << endl;
         dset.write(v);
-        cout << "done" << endl;
         dset.create_attr<string>("description", H5TypeStr::shape( descrpts[2] ))
             .write( descrpts[2] );
-        cout << "done" << endl;
     }
     write_halo(boundid, vll, long long, 5)
+    cout << "done" << endl;
 
     /**
      * output the galaxy catalog
@@ -128,6 +125,7 @@ int main(int argc, char const *argv[]){
     descrpts = { {"stellar mass [10^10 Mpc/h]"},
         {"star formation rate [ 10 Msun/yr ]"} };
     names = { "stellar-mass", "SFR"};
+    cout << "done" << endl;
 #define write_galaxy(key, out, type, id){\
     vectorize(gals, key, out)\
     auto dset = grpgal.create_dataset<type>( names[id], { gals.size() } );\
@@ -137,7 +135,7 @@ int main(int argc, char const *argv[]){
 }
     write_galaxy(mass, v, double, 0)
     write_galaxy(sfr, v, double, 1)
-
+    cout << "done" << endl;
 
     return 0;
 }
