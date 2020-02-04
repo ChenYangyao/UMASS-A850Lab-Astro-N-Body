@@ -113,9 +113,12 @@ int main(int argc, char const *argv[]){
     {
         auto dset = grphalo.create_dataset<double>( 
             names[2], { halos.size(), 3 } );
+        cout << "done" << endl;
         dset.write(v);
+        cout << "done" << endl;
         dset.create_attr<string>("description", H5TypeStr::shape( descrpts[2] ))
             .write( descrpts[2] );
+        cout << "done" << endl;
     }
     write_halo(boundid, vll, long long, 5)
 
