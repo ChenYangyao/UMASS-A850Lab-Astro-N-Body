@@ -1,6 +1,6 @@
 # Lab: First Run of Gadget-2
 
-[Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./wdir/galaxy_collide.ipynb) | [View Gif animation for Galaxy collision](./wdir/galaxy_collide/t2/anim1.avi)
+[Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./wdir/galaxy_collide.ipynb) | View [GIF](./wdir/galaxy_collide/t2/anim1.gif) or [AVI](./wdir/galaxy_collide/t2/anim1.avi) animation for galaxy collision
 
 ## Introduction
 
