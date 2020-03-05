@@ -72,8 +72,8 @@ BufferSize            25          % in MByte
 
 
 % System of units
-UnitLength_in_cm         3.085678e21        ;  1.0 kpc 
-UnitMass_in_g            1.989e43           ;  1.0e10 solar masses 
+UnitLength_in_cm         3.085677581467192e21        ;  1.0 kpc 
+UnitMass_in_g            1.988409870698051e43           ;  1.0e10 solar masses 
 UnitVelocity_in_cm_per_s 1e5                ;  1 km/sec 
 GravityConstantInternal  0
  
