@@ -1,0 +1,123 @@
+HDF5 "snapshot_000.hdf5" {
+GROUP "Header" {
+   ATTRIBUTE "BoxSize" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Flag_Cooling" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Flag_Entropy_ICs" {
+      DATATYPE  H5T_STD_U32LE
+      DATASPACE  SIMPLE { ( 6 ) / ( 6 ) }
+      DATA {
+      (0): 0, 0, 0, 0, 0, 0
+      }
+   }
+   ATTRIBUTE "Flag_Feedback" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Flag_Metals" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Flag_Sfr" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Flag_StellarAge" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "HubbleParam" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 1
+      }
+   }
+   ATTRIBUTE "MassTable" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SIMPLE { ( 6 ) / ( 6 ) }
+      DATA {
+      (0): 0, 0.00104634, 0.00023252, 0, 0, 0
+      }
+   }
+   ATTRIBUTE "NumFilesPerSnapshot" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 1
+      }
+   }
+   ATTRIBUTE "NumPart_ThisFile" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SIMPLE { ( 6 ) / ( 6 ) }
+      DATA {
+      (0): 0, 40000, 20000, 0, 0, 0
+      }
+   }
+   ATTRIBUTE "NumPart_Total" {
+      DATATYPE  H5T_STD_U32LE
+      DATASPACE  SIMPLE { ( 6 ) / ( 6 ) }
+      DATA {
+      (0): 0, 40000, 20000, 0, 0, 0
+      }
+   }
+   ATTRIBUTE "NumPart_Total_HighWord" {
+      DATATYPE  H5T_STD_U32LE
+      DATASPACE  SIMPLE { ( 6 ) / ( 6 ) }
+      DATA {
+      (0): 0, 0, 0, 0, 0, 0
+      }
+   }
+   ATTRIBUTE "Omega0" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "OmegaLambda" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Redshift" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+   ATTRIBUTE "Time" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SCALAR
+      DATA {
+      (0): 0
+      }
+   }
+}
+}
