@@ -6,7 +6,7 @@ do
     do
         wd="$PWD/runs_alpha${i}.${j}"
         name="runs${i}.${j}"
-        cmd="mpirun -np 8 Gadget2 param.txt"
+        cmd='"mpirun -np 8 Gadget2 param.txt"'
         _cmd="msub -j mpi -p 8 -d ${wd} -wd ${wd} -n ${name} -m 16gb ${cmd}"
         ${_cmd}
     done
