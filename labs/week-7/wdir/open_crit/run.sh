@@ -6,8 +6,8 @@ do
     do
         wd="$PWD/runs_alpha${i}.${j}"
         name="runs${i}.${j}"
-        
-        _cmd="msub -j mpi -p 8 -d ${wd} -wd ${wd} -n ${name} -m 16gb"
-        ${_cmd} 'date "+%T"' 'mpirun -np 8 Gadget2 param.txt' 'date "+%T"'
+
+        _cmd="msub -j mpi -p 16 -d ${wd} -wd ${wd} -m 24gb"
+        ${_cmd} 'date "+%T"' 'mpirun -np 16 Gadget2 param.txt' 'date "+%T"'
     done
 done
