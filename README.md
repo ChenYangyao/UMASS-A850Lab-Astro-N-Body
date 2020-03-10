@@ -13,3 +13,5 @@ Week 3 - Using HDF5 for IO ([Report](./labs/week-3/README.md)).
 Week 4 - Scientific Visualization with Paraview ([Report](./labs/week-4/README.md)).
 
 Week 5 - First Run of Gadget-2 ([Report](./labs/week-5/README.md)).
+
+Week 6 & 7 - Generate Initial Conditions ([Report](./labs/week-7/README.md)).
