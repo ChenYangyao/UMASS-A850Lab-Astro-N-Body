@@ -24,7 +24,7 @@ We first need assume a halo profile (because the solution of steady Boltzmann eq
 The results of rho - r, M - r, V - r and sigma - r relations in the above assumption are shown in the Figure 1. Here we see the curves are really smoothing, although all the physical quantities have very large dynamical range.
 
 <table><tr>
-    <td><img src="./wdir/jean_IC_recipe.png"></td><td width="300"><em>
+    <td><img src="./wdir/output/jean_IC_recipe.png"></td><td width="300"><em>
     Figure 1: The initial condition by Jeans' Equation.
     </em><br>
     Upper left, upper right, lower left, lower right panels show the density profile, enclosed-mass profile, potential profile and velocity dispersion profile. Here we assume a Milky-way-like galaxy system with total mass M = 10^12 Msun, characteristic scale rs = 10 kpc. The density profile is assumed the NFW profile with an erf truncation at r = 150 kpc.
@@ -34,37 +34,51 @@ By Monte Carlo method, 10^5 particles are generated to represent the phase-space
 
 - Total energy E as a function of time. Since E in simulation should be conserved, we use (E - E0)/E0 to represent the energy change relative to its inital value E0.
 - The virial ratio -2T/V. Here T is the kinetic energy and V is the potential energy. According to virial theory, a equilibrium system should have virial ratio ~ 1.
-- The quantile radii (q=10%, 25%, 50%, 75%, 90%, 98%) relative to the center of mass for each particles.
+- The quantile radii (q=10%, 25%, 50%, 75%, 90%, 98%) relative to the center of mass for each particle.
 - The position of the center of mass.
 - The velocity of the center of mass.
 - the angular momentum relative to the center of mass.
 
-The time evolution of these 6 quantities are shown in the Figure 2. The energy seems to be conserved within 1 %. The virial theory is obeyed within 8 %. The quantile radii seem stable. Although the inner-most and outer-most curves are shifting outward, possibly due to the velocity distribution is not strictly Guassian which is assumed by Jeans' approach. The center of mass seems not in the rest. It is moving and accelerated. This is because tree-code does not conserve the monmentum. The angular momentum also changes.
+The time evolution of these 6 quantities are shown in the Figure 2. The energy seems to be conserved within 1 %. The virial theory is obeyed within 8 %. The quantile radii seem stable. Although the inner-most and outer-most curves are shifting outward, possibly due to the velocity distribution is not strictly Gaussian which is assumed by Jeans' approach. The center of mass seems not in the rest. It is moving and accelerated. This is because tree-code does not conserve momentum. The angular momentum also changes.
 
 <table><tr>
-    <td><img src="./wdir/measure_stats_jeans.png"></td></tr>
+    <td><img src="./wdir/output/measure_stats_jeans.png"></td></tr>
     <tr><td><em>Figure 2: Statistics of particle system after running the N-body code with Jeans' Equation IC.
     </em><br>
     10^5 particles are used to trace the phase space distribution. The system is evolved under the Newtonian gravity from t = 0 to t = 10 Gyr and 12 snapshots is dumped. The relative change of total energy, the virial ratio -2T/V, the quantile radii of particles, the position and velocity of center of mass, and the relative change of the angular momentum are shown at different time steps.
     </td></tr></table>
 
+### Effect of Opening Criterion on Momentum Conservation
 Direct force calculation should conserve the momentum with Leapfrog integration. The cell opening criterion in the tree code is then responsible for the break of momentum conservation. Here we run a set of simulations with different opening criterion parameter alpha. For each alpha, we calculate the CPU hours for 5 Gyr simulation, the move of the center of mass, and the change of the velocity of the center of mass. Results are shown in the Figure 3. Here we see the alpha-delta v relation is almost power-law for small alpha, and becomes flatten at larger alpha.
 
 
 <table><tr>
-    <td><img src="./wdir/open_crit.png"></td></tr>
+    <td><img src="./wdir/output/open_crit.png"></td></tr>
     <tr><td><em> Figure 3: Effect of changing opening criteria.
     </em><br>
-    50000 particles are used by Jeans' Equation to generate the ICs. For each different value of opening criteria 'alpha', we generate 10 random ICs to calculate the errorbar of statistics. Gadget-2 code is run on these ICs from t = 0 to t = 5 Gyr, and the CPU hours, move of center of mass, and the change of the velocity of center of mass is measured. Here we assume a Milky-way-like galaxy with mass M = 10^12 Msun, 10 kpc characteristic scale and erf truncated at 150 kpc.
+    50000 particles are used by Jeans' Equation to generate the ICs. For each different value of opening criteria 'alpha', we generate 10 random ICs to calculate the error bar of statistics. Gadget-2 code is run on these ICs from t = 0 to t = 5 Gyr, and the CPU hours, move of center of mass, and the change of the velocity of center of mass is measured. Here we assume a Milky-way-like galaxy with mass M = 10^12 Msun, 10 kpc characteristic scale and erf truncated at 150 kpc.
     </td></tr></table>
 
 ## Initial Conditions with Eddington Inversion
 
-For comparison, we also calculate the IC by Eddington Inversion. We use the same number of particles to trace the IC, and do the simulation using the same set of parameters. The result is shown in the Figure 4. The quality of this initial condition seems bad. I will check the implementation later to improve this.
+For comparison, we also calculate the IC by Eddington Inversion. In principle the Eddington Inversion gives a precise result when the system is ergodic but Jeans' Equation does not. The problem is that in Jeans' Equation only velocity dispersion is derived, and the distribution is assumed to be Gaussian which is not always true.
+
+Figure 4 shows a comparison of velocity dispersion generated by Eddington Inversion and Jeans' Equation. It is obvious that at very small radius and very large radius, the Jeans' Equation gives a bad approximation. At intermediate radius, the Gaussian condition is held.
 
 <table><tr>
-    <td><img src="./wdir/measure_stats.png"></td></tr>
-    <tr><td><em>Figure 4: Statistics of particle system after running the N-body code with Eddington Inversion IC.
+    <td><img src="./wdir/output/compare_recipe.png"></td></tr><tr><td>
+    <em>
+    Figure 4: Compare the velocity distribution function at different radius from Jeans' Equation and Eddington Inversion.
+    </em><br>
+    Each panel shows the density distribution at a radius r. Solid lines are from Eddington Inversion. Dashed lines are from Jean's Equation.
+    The density profile is assumed the NFW profile with halo mass 10^12 Msun, rs = 10 kpc and an erf truncation at r = 150 kpc.
+    </td></tr></table>
+
+As did in the Jeans' Equation, we use the 10^5 particles to trace the IC, and do the simulation using the same set of parameters. The result is shown in the Figure 4. The quality of this initial condition seems bad. I will check the implementation later to improve this.
+
+<table><tr>
+    <td><img src="./wdir/output/measure_stats_edd.png"></td></tr>
+    <tr><td><em>Figure 5: Statistics of particle system after running the N-body code with Eddington Inversion IC.
     </em><br>
     10^5 particles are used to trace the phase space distribution. The system is evolved under the Newtonian gravity from t = 0 to t = 10 Gyr and 12 snapshots is dumped. The relative change of total energy, the virial ratio -2T/V, the quantile radii of particles, the position and velocity of center of mass, and the relative change of the angular momentum are shown at different time steps.
     </td></tr></table>
