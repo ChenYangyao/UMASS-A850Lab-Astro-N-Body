@@ -1,10 +1,22 @@
 #!/bin/bash
 
-for i in  5000 10000 50000 100000 500000 1000000
-do
-    wd="$PWD/n$i"
-    name="n$i"
+nparts=(5000 10000 50000 100000 500000 1000000)
+ncs=(1 1 1 2 4 8)
+nprocs=(2 4 8 8 8 8)
+totalprocs=(2 4 8 16 32 64)
+mems=("4gb" "8gb" "16gb" "16gb" "16gb" "16gb")
 
-    _cmd="msub -j mpi -c 16 -p 4 -mpiprocs 4 -m 16gb -n ${name} -d ${wd} -wd ${wd}"
-    ${_cmd} 'date "+%T"' 'mpirun -np 64 Gadget2 param.txt' 'date "+%T"'
+for i in  {0..5}
+do
+    npart=${nparts[i]}
+    nc=${ncs[i]}
+    nproc=${nprocs[i]}
+    mem=${mems[i]}
+    totproc=${totalprocs[i]}
+
+    wd="$PWD/n$npart"
+    name="n$npart"
+
+    _cmd="msub -j mpi -c ${nc} -p ${nproc} -mpiprocs ${nproc} -m ${mem} -n ${name} -d ${wd} -wd ${wd}"
+    ${_cmd} 'date "+%T"' "mpirun -np ${totalproc} Gadget2 param.txt" 'date "+%T"'
 done
