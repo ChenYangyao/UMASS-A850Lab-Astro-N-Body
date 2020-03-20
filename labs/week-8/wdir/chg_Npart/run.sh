@@ -12,7 +12,7 @@ do
     nc=${ncs[i]}
     nproc=${nprocs[i]}
     mem=${mems[i]}
-    totproc=${totalprocs[i]}
+    totalproc=${totalprocs[i]}
 
     wd="$PWD/n$npart"
     name="n$npart"
