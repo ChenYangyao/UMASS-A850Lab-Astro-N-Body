@@ -1,10 +1,10 @@
 #!/bin/bash
 
 nparts=(5000 10000 50000 100000 500000 1000000)
-ncs=(1 1 1 2 4 8)
-nprocs=(2 4 8 8 8 8)
+ncs=(1    1 1 1  2  4)
+nprocs=(2 4 8 16 16 16)
 totalprocs=(2 4 8 16 32 64)
-mems=("4gb" "8gb" "16gb" "16gb" "16gb" "16gb")
+mems=("4gb" "8gb" "16gb" "32gb" "32gb" "32gb")
 
 for i in  {0..5}
 do
