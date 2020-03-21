@@ -1,8 +1,8 @@
 #!/bin/bash
 
-alphas=(0.0010 0.0020 0.0050 0.0100)
+alphas=(0.0001 0.0010 0.0020 0.0050 0.0100)
 
-for i in  {0..3}
+for i in  {0..4}
 do
     alpha=${alphas[i]}
 
