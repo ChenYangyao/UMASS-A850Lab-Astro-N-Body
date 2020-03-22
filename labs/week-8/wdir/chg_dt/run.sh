@@ -9,6 +9,6 @@ do
     wd="$PWD/dt$dt"
     name="dt$dt"
 
-    _cmd="msub -j mpi -c 1 -p 4 -mpiprocs 4 -m 12gb -n ${name} -d ${wd} -wd ${wd}"
-    ${_cmd} 'date "+%T"' "mpirun -np 4 Gadget2 param.txt" 'date "+%T"'
+    _cmd="msub -j mpi -c 4 -p 8 -mpiprocs 8 -m 16gb -n ${name} -d ${wd} -wd ${wd}"
+    ${_cmd} 'date "+%T"' "mpirun -np 32 Gadget2 param.txt" 'date "+%T"'
 done
