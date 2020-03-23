@@ -1,4 +1,4 @@
-# Lab: Orbits or Particles
+# Lab: Orbits of Particles
 
 [Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./wdir/Orbit.ipynb)
 
