@@ -1,4 +1,4 @@
-# Lab: Generate Initial Conditions
+# Lab: Orbits or Particles
 
 [Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./wdir/Orbit.ipynb)
 

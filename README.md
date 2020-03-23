@@ -15,3 +15,5 @@ Week 4 - Scientific Visualization with Paraview ([Report](./labs/week-4/README.m
 Week 5 - First Run of Gadget-2 ([Report](./labs/week-5/README.md)).
 
 Week 6 & 7 - Generate Initial Conditions ([Report](./labs/week-7/README.md)).
+
+Week 8 - Orbits or Particles ([Report](./labs/week-8/README.md)).
