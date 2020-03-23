@@ -1,6 +1,6 @@
 # Lab: Orbits of Particles
 
-[Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](./wdir/Orbit.ipynb)
+[Back to home](https://github.com/ChenYangyao/N-Body-Course) | [View Jupyter](wdir/Orbit.ipynb)
 
 In the [last lab](../week-7/README.md) I tried measuring the N-body simulation result by statistical quantities, e.g., the energy, angular momentum, percentile radii and virial ratio. An equally important measurement is the orbit of particles. In this lab I will present the results of particle orbits. The outline of this reports is
 - Analytic orbit in spherical potential: I will use Leapfrog integration to calculate the orbit of particle in given potential field ([Binney & Tremaine, Section 3.4]((https://press.princeton.edu/books/paperback/9780691130279/galactic-dynamics))).
