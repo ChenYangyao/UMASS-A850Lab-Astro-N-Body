@@ -86,7 +86,7 @@ Other tests include the change of energy, E, and the change of angular momentum,
     </td></tr></table>
 
 <table><tr>
-    <td><img src="./figs/chg_Npart_JeansICs_E.png"></td></tr>
+    <td><img src="./figs/chg_Npart_JeansICs_L.png"></td></tr>
     <tr><td><em>
     Figure 7: Angular momentum change of test particles with different turning radii and in simulations with different number of particles.
     </em><br>

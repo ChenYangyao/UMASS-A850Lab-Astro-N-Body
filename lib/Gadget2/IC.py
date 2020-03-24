@@ -2,6 +2,21 @@ import numpy as np
 import h5py
 
 def IC_generator(filename, pos, vel, mass):
+    r"""generate initial condition file for Gadget2 run.
+    Currently only dark matter particles are supported.
+
+    Examples
+    ----------
+    # generate 100 particles with random positions and velocities.
+    # Output them to a HDF5 file.
+    # You may then use it as a IC of Gadget2 simulation.
+    import numpy as np
+    Npart = 100
+    pos = np.random.randn(Npart, 3)
+    vel = np.random.randn(Npart, 3)
+    part_mass = 1.0e12 / Npart
+    IC_generator( '_Gadget2_IC.hdf5', pos, vel, part_mass )
+    """
     npart = len(pos)
     attrs = {
         'BoxSize': 0., 'Flag_Cooling': 0,
@@ -35,3 +50,12 @@ def IC_generator(filename, pos, vel, mass):
     grp = file.create_group('PartType1')
     for k, v in dsets.items():
         grp.create_dataset(k, data=v)
+
+if __name__ == "__main__":
+    print("Gadget2 IC File Generator for DM only simulation")
+    print("An example file is generated: _Gadget2_IC.hdf5")
+    Npart = 100
+    pos = np.random.randn(Npart, 3)
+    vel = np.random.randn(Npart, 3)
+    part_mass = 1.0e12 / Npart
+    IC_generator( '_Gadget2_IC.hdf5', pos, vel, part_mass )
