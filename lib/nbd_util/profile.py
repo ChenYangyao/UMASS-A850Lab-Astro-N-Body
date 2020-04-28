@@ -196,6 +196,7 @@ class DoublePowerlawProfile(NFWProfile):
         self._tags.update({ 'alpha': alpha, 'beta': beta, 'gamma':gamma })
     def _Irho(self, x):
         alpha, beta, gamma = self['alpha'], self['beta'], self['gamma']
-        xin = np.power( x, gamma )
+        xpc = self['xcore']+x
+        xin = np.power( xpc, gamma )
         xout = np.power( 1.0+np.power(x, 1.0/alpha), (beta-gamma)*alpha )
         return 1.0 / ( xin * xout )
