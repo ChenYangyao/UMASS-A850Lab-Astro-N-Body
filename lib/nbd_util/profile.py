@@ -145,8 +145,9 @@ class HaloProfileBase:
 
 class NFWProfile(HaloProfileBase):
     def __init__(self, mass, rs, rvir=None, rt=None, rw=None, 
-        r0=None, rcore=None, units=None, name='NFW' ):
+        r0=None, rcore=None, units=None, name='NFW', tags_kw = {} ):
         self._tags = {'mass': mass, 'name': name}
+        self._tags.update(tags_kw)
         
         _rs = rs
         _rvir = rvir if rvir is not None else 15.0*_rs
@@ -191,9 +192,9 @@ class DoublePowerlawProfile(NFWProfile):
     def __init__(self, alpha, beta, gamma,
         mass, rs, rvir=None, rt=None, rw=None,
         r0=None, rcore=None, units=None, name='Double power-law' ):
+        tags_kw = { 'alpha': alpha, 'beta': beta, 'gamma':gamma }
         NFWProfile.__init__(self, mass, rs, rvir, rt, rw,
-            r0, rcore, units, name)
-        self._tags.update({ 'alpha': alpha, 'beta': beta, 'gamma':gamma })
+            r0, rcore, units, name, tags_kw=tags_kw)
     def _Irho(self, x):
         alpha, beta, gamma = self['alpha'], self['beta'], self['gamma']
         xpc = self['xcore']+x
