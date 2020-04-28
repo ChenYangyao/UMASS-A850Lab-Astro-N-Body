@@ -185,3 +185,17 @@ class HernquistProfile(NFWProfile):
         xpc = self['xcore']+x
         return 1.0/( xpc*xp1*xp1*xp1 ) * \
             scipy.special.erf( (self['xt']-x)/self['xw'] )
+
+
+class DoublePowerlawProfile(NFWProfile):
+    def __init__(self, alpha, beta, gamma,
+        mass, rs, rvir=None, rt=None, rw=None,
+        r0=None, rcore=None, units=None, name='Double power-law' ):
+        NFWProfile.__init__(self, mass, rs, rvir, rt, rw,
+            r0, rcore, units, name)
+        self._tags.update({ 'alpha': alpha, 'beta': beta, 'gamma':gamma })
+    def _Irho(self, x):
+        alpha, beta, gamma = self['alpha'], self['beta'], self['gamma']
+        xin = np.power( x, gamma )
+        xout = np.power( 1.0+np.power(x, 1.0/alpha), (beta-gamma)*alpha )
+        return 1.0 / ( xin * xout )
